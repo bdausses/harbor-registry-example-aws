@@ -1,0 +1,15 @@
+# Compiled Terraform modules
+*.tfstate
+*.tfstate.backup
+
+# Terraform dependency directory
+.terraform
+
+# Module registry
+.terraform.lock.hcl
+
+# Terraform plans
+*.tfplan
+
+# Terraform variables files
+*.tfvars
