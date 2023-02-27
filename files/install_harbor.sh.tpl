@@ -13,6 +13,9 @@ else
   SET_SSL=TRUE
 fi
 
+# Harbor admin password
+HARBOR_ADMIN_PASSWORD=${harbor_admin_password}
+
 # Get releases file
 wget --output-document=$RELEASES_FILE $RELEASES_URL
 
@@ -28,6 +31,7 @@ tar -xzvf harbor-online-installer-$LATEST_VERSION.tgz
 cd harbor
 cp harbor.yml.tmpl harbor.yml
 sed -i "s/reg.mydomain.com/$IPorFQDN/g" harbor.yml
+sed -i "/^harbor_admin_password:/c\harbor_admin_password: $HARBOR_ADMIN_PASSWORD" harbor.yml
 
 if [ "$SET_SSL" = "TRUE" ]
   then
@@ -44,4 +48,4 @@ if [ "$SET_SSL" = "TRUE" ]
 fi
 
 # Execute install script
-sudo ./install.sh --with-chartmuseum
+sudo ./install.sh
