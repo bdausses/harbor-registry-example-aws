@@ -2,6 +2,7 @@
 variable "aws_profile" {
   description = "The name of the AWS CLI profile to use."
   type        = string
+  default     = ""
 }
 
 # AWS Region
