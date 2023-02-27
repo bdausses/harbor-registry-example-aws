@@ -19,12 +19,24 @@ This repo contains terraform code that will quickly:
 `git clone https://github.com/bdausses/harbor-registry-example-aws.git`
 - Copy the example tfvars file to the actual tfvars file:
 `cp terraform.tfvars.example terraform.tfvars`
-- Set the key_name variable (and optionally, the DNS variables):
-`vi terraform.tfvars`
+- Use your favorite text editor to set the variables in the `terraform.tfvars` file you just created:
+	- Required variable:
+		- `key_name`
+	- Optional variables:
+		- `aws_profile` - The name of the desired AWS CLI profile to use.  Default: `null`
+		- `aws_region` - The name of the AWS region to use.  Default: `us-east-1`
+		- `domain` - A Route 53 hosted zone.  Use this if you want to assign a DNS name to your instance.  Default: empty string
+		- `dns_record` - This is the A record that will be created in the above Route 53 hosted zone.  Default: empty string
+		- `instance_size` - EC2 instance size to use.  Default: `t3a.medium`
+		- `harbor_admin_password` - The `admin` password for the Harbor registry.  Default: `Harbor12345`
 - Initialize and apply.
   - `terraform init`
   - `terraform plan`
   - `terraform apply`
+
+## Outputs
+- `instance-connection-string` - This will be an SSH command to SSH to your newly created instance.
+- `harbor-registry-url` - URL of your newly created Harbor registry.
 
 ## License
 This code is licensed under [the Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0).

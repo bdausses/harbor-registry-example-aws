@@ -2,6 +2,7 @@
 # SSH Key Name - Set this to the name of the ssh key at AWS that you will use to connect to this instance.  This key should be loaded in your ssh-agent.
 key_name = "ENTER YOUR KEY NAME HERE"
 
+
 # OPTIONAL Variables
 # Define DNS info - If you have a hosted zone in Route 53, you can uncomment these 2 lines and enter in the domain name and host name that you want to use here.
 # domain = "your-route53-hosted-zone.com"
@@ -12,6 +13,9 @@ key_name = "ENTER YOUR KEY NAME HERE"
 
 # AWS Region - If you want to use something other than us-east-1, uncomment this line and specify the region to use here.
 # aws_region = "your-preferred-aws-region"
+
+# EC2 Instance Size - If you want to use a specific instance size, uncomment this line and specify the size to use here.
+# instance_size = "your-preferred-aws-region"
 
 # Harbor admin password - If you want to use something other than the default of 'Harbor12345', uncomment this line and set that passsword here.
 # harbor_admin_password = "your-password-here"
