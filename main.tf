@@ -39,14 +39,6 @@ data "aws_ami" "ubuntu" {
   most_recent = true
 }
 
-data "template_file" "harbor_install_script" {
-  template = "${file("files/install_harbor.sh.tpl")}"
-  vars = {
-    fqdn = try(aws_route53_record.harbor-registry[0].fqdn, aws_instance.harbor-registry.public_ip)
-    harbor_admin_password = var.harbor_admin_password
-  }
-}
-
 # Harbor Instance
 resource "aws_instance" "harbor-registry" {
   ami           = data.aws_ami.ubuntu.id
@@ -75,7 +67,12 @@ resource "null_resource" "harbor-registry_preparation" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.harbor_install_script.rendered}"
+    content     = templatefile("${path.module}/files/install_harbor.sh.tpl",
+      {
+        fqdn = try(aws_route53_record.harbor-registry[0].fqdn, aws_instance.harbor-registry.public_ip)
+        harbor_admin_password = var.harbor_admin_password
+      }
+    )
     destination = "/tmp/install_harbor.sh"
   }
 
