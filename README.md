@@ -15,23 +15,6 @@ This repo contains terraform code that will quickly:
 - This code assumes you are running an SSH agent and that the key you will use to connect to the newly spun up instance is loaded in that agent.
 
 ## Usage
-Clone the repo and switch into it:
-`git clone https://github.com/bdausses/harbor-registry-example-aws.git`
-`cd harbor-registry-example-aws`
-
-Copy the example tfvars file to the actual tfvars file:
-`cp terraform.tfvars.example terraform.tfvars`
-
-Set the key_name variable (and optionally, the DNS variables):
-`vi terraform.tfvars`
-
-Execute the terraform plan:
-`terraform plan`
-
-Assuming that went well, proceed with the apply
-`terraform apply`
-
-## Usage
 - Clone the repo and switch into it:
 `git clone https://github.com/bdausses/harbor-registry-example-aws.git`
 - Copy the example tfvars file to the actual tfvars file:
