@@ -22,8 +22,8 @@ resource "aws_route53_record" "harbor-registry" {
     "${aws_instance.harbor-registry.public_ip}"
   ]
 }
-### End DNS ###
 
+# Templates
 data "aws_ami" "ubuntu" {
   filter {
     name   = "name"
@@ -40,18 +40,19 @@ data "template_file" "harbor_install_script" {
   }
 }
 
+# Harbor Instance
 resource "aws_instance" "harbor-registry" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3a.medium"
   vpc_security_group_ids = [aws_security_group.harbor-registry.id]
-  key_name = "bdausses-se"
+  key_name = var.key_name
 
   tags = {
-    Name = "harbor-registry"
+    Name = "Harbor-Registry"
   }
 }
 
-# Post-provisioning steps for harbor-registry
+# Post-provisioning steps for Harbor Instance
 resource "null_resource" "harbor-registry_preparation" {
   depends_on = [aws_route53_record.harbor-registry]
     triggers = {
@@ -86,6 +87,7 @@ resource "null_resource" "harbor-registry_preparation" {
   }
 }
 
+# Security Group
 resource "aws_security_group" "harbor-registry" {
   name        = "harbor-registry"
   description = "Allow SSH, HTTP, and HTTPS access ingress and anything egress."
@@ -119,6 +121,7 @@ resource "aws_security_group" "harbor-registry" {
   }
 }
 
+# Outputs
 output "instance-connection-string" {
   value = "ssh -o StrictHostKeyChecking=no ubuntu@${aws_instance.harbor-registry.public_ip}"
 }
@@ -129,4 +132,3 @@ output "harbor-registry-url" {
     "http://${aws_instance.harbor-registry.public_ip}",
   )
 }
-

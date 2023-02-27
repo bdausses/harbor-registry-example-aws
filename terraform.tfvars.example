@@ -1,3 +1,8 @@
-# Define DNS info
+# Required Variables
+# SSH Key Name - Set this to the name of the ssh key at AWS that you will use to connect to this instance.  This key should be loaded in your ssh-agent.
+key_name = "ENTER YOUR KEY NAME HERE"
+
+# OPTIONAL Variables
+# Define DNS info - If you have a hosted zone in Route 53, you can enter in the domain name and host name that you want to use here.
 domain = "your-route53-hosted-zone.com"
 dns_record = "harbor"
