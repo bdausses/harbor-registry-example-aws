@@ -11,7 +11,7 @@ This repo contains terraform code that will quickly:
 *Translation*:  YMMV, and do your due diligence if you are going to use this for anything other than a transient test/example deployment.
 
 ## Prerequisites
-- Obviously, Terraform is required.  This code was originally written for Terraform 1.3.7, and that is reflected in the .tfswitchrc file included.  [TFSwitch](https://tfswitch.warrensbox.com/) is NOT required, but you may find it useful for managing Terraform versions.
+- Terraform is required.  This code was originally written for Terraform 1.3.7, and that is reflected in the .tfswitchrc file included.  [TFSwitch](https://tfswitch.warrensbox.com/) is NOT required, but you may find it useful for managing Terraform versions.
 - This code assumes you are running an SSH agent and that the key you will use to connect to the newly spun up instance is loaded in that agent.
 
 ## Usage
