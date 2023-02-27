@@ -21,7 +21,7 @@ This repo contains terraform code that will quickly:
 `cp terraform.tfvars.example terraform.tfvars`
 - Use your favorite text editor to set the variables in the `terraform.tfvars` file you just created:
 	- Required variable:
-		- `key_name`
+		- `key_name` - The name of your SSH Key Pair at AWS.
 	- Optional variables:
 		- `aws_profile` - The name of the desired AWS CLI profile to use.  Default: `null`
 		- `aws_region` - The name of the AWS region to use.  Default: `us-east-1`
