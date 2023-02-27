@@ -1,6 +1,12 @@
+terraform {
+  required_version = ">= 1.3.7"
+}
+
 provider "aws" {
-  region  = "us-east-1"
-  profile = "org-management-bdausses"
+  region  = var.aws_region
+  profile = var.aws_profile != "" ? var.aws_profile : null
+  skip_credentials_validation = var.aws_profile == ""
+  skip_metadata_api_check     = var.aws_profile == ""
 }
 
 ### DNS ###
@@ -37,13 +43,14 @@ data "template_file" "harbor_install_script" {
   template = "${file("files/install_harbor.sh.tpl")}"
   vars = {
     fqdn = try(aws_route53_record.harbor-registry[0].fqdn, aws_instance.harbor-registry.public_ip)
+    harbor_admin_password = var.harbor_admin_password
   }
 }
 
 # Harbor Instance
 resource "aws_instance" "harbor-registry" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3a.medium"
+  instance_type = var.instance_size
   vpc_security_group_ids = [aws_security_group.harbor-registry.id]
   key_name = var.key_name
 
